@@ -1,0 +1,53 @@
+.navigationBarContainer {
+  z-index: 9999;
+  max-width: 130px;
+  padding: 20px 10px 0;
+  background-color: #F06B02;
+  position: absolute;
+  height: 100dvh;
+  justify-content: center;
+}
+
+.appName {
+  margin: 10px 0 0;
+  height: 100px;
+  text-align: center;
+}
+
+.restorieLogo {
+  width: 100px;
+  object-fit: contain;
+}
+
+.restorieAdmin {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.navigationIcons {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.navButton{
+  border: none;
+  background-color: rgb(224, 137, 70);
+  color: white;
+  transition: background-color 0.15s;
+  margin-bottom: 10px;
+}
+
+.navButton:hover{
+  background-color: #ce8248;
+}
+
+.navButton:active{
+  background-color: #b47341;
+}
+.navIcon{
+  width: 100%;
+}

@@ -1,0 +1,22 @@
+
+.hidden{
+    display: none;
+}
+
+.mainRamContainer{
+    background-color: #2d492d;
+    height: 100%;
+    width: 100%;
+    border: 2px solid #22282b;
+    position: absolute;
+    padding-left: 130px;
+    max-width: 1981px;
+}
+
+.header{
+    background-color: #1b332c;
+    border: 3px solid #22282b;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

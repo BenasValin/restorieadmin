@@ -1,0 +1,18 @@
+.hidden{
+    display: none;
+}
+
+.mainSearchContainer{
+    background-color: #2d492d;
+    height: 100%;
+    border: 2px solid #22282b;
+    position: absolute;
+    margin-left: 130px;
+    max-width: 1980px;
+    width: 100%;
+}
+
+.QRCodeScanner{
+    max-width: 1000px;
+    max-height: 1000px;
+}

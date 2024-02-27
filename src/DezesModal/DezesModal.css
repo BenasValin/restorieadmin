@@ -1,0 +1,77 @@
+
+.mainBoxContainer{
+    background-color: #2d492d;
+    height: 100%;
+    border: 2px solid #22282b;
+    position: absolute;
+    padding-left: 130px;
+}
+
+.header{
+    background-color: #1b332c;
+    border: 3px solid #22282b;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.boxSearch{
+    width: 20%;
+    color: black;
+}
+
+.optimalBoxSearchContainer{
+    background-color: #444c50;
+    border: 1px solid black;
+    width: 80%;
+    height: 90%;
+    min-width: 450px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 5px;
+    margin-left: 15px;
+}
+
+.button{
+    background-color: #F06B02;
+    color: white;
+    height: 50px;
+    width: 100px;
+    margin: auto;
+    padding: 10px;
+    list-style: none;
+    border: 2px solid #c05707;
+    transition: background-color 0.07s;
+}
+.button:hover{
+    background-color: #fc7c1b;
+}
+.button:active{
+    background-color: #b34d00;
+    border: 2px solid #b34d00;
+    color: rgba(255, 255, 255, 0.774);
+}
+.hidden{
+    display: none;
+}
+.boxEditContainer{
+    background-color: #444c50;
+    border: 1px solid black;
+    height: 120px;
+    min-width: 630px;
+}
+
+.boxEdit{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    
+}
+
+.boxDimensions{
+    height: 15px;
+    width: 50px;
+}
+.searchByNumber{
+    width: 70%;
+}
