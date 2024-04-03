@@ -1,0 +1,52 @@
+
+.hidden{
+    display: none;
+}
+
+.mainRamContainer{ 
+    background-color: #2d492d;
+    border: 2px solid #22282b;
+    position: absolute;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.headerPrekes{
+    background-color: #1b332c;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 30px;
+}
+
+.mainRamContainer{
+
+    background-color: #1d3f35;
+
+}
+
+.recordHeader{
+    display: flex;
+    flex-direction: row;
+    background-color: #1b332c;
+    align-items: end;
+}
+.choise{
+    height: 70px;
+    background-color: #1d3f35;
+    width: auto;
+    padding: 5px;
+    border: 1px solid #1a382f;
+    aspect-ratio: 1/1;
+}
+
+.image{
+    height: 70%;
+}
+.choise:hover{
+    background-color: #22493d;
+}
+
+.aqw{
+    height: 80px
+}
