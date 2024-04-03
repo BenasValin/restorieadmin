@@ -1,7 +1,8 @@
 const config = require('./dbConfig'),
 sql = require('mssql');
 
-const findBoxes = async (side1, side2, side3, pak) => {
+const findBoxes = async (id, side1, side2, side3, pak) => {
+    id = parseInt(id)
     side1 = parseInt(side1)
     side2 = parseInt(side2)
     side3 = parseInt(side3)
@@ -15,7 +16,7 @@ const findBoxes = async (side1, side2, side3, pak) => {
     side3 = box[2];
    try {
         let pool = await sql.connect(config);
-        const query = `Select * from boxes where ilgis > ${side1 + pak + pak} and plotis > ${side2 + pak + pak} and aukstis > ${side3 + pak + pak}`;
+        const query = `Select * from boxes where ilgis > ${side1 + pak + pak} and plotis > ${side2 + pak + pak} and aukstis > ${side3 + pak + pak} ${id == -1 ? '' : "and id = " + id}`;
         console.log(query); // Log the query
         let boxes = await pool.request().query(query);
         return boxes;

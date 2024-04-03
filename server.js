@@ -28,10 +28,10 @@ app.use(cors());
 // })
 
 app.post('/api/getboxes', async (req, res) => {
-    const box = {ilgis: req.body.ilgis, plotis: req.body.plotis, aukstis: req.body.aukstis, ipakavimas: req.body.ipakavimas}
+    const box = {id: req.body.id, ilgis: req.body.ilgis, plotis: req.body.plotis, aukstis: req.body.aukstis, ipakavimas: req.body.ipakavimas}
     console.log(box)
     try {
-      const boxes = await dbOperation.findBoxes(box.ilgis, box.plotis, box.aukstis, box.ipakavimas);
+      const boxes = await dbOperation.findBoxes(box.id, box.ilgis, box.plotis, box.aukstis, box.ipakavimas);
       res.json(boxes);
     } catch (error) {
       console.error(error);

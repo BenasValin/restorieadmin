@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import './SearchPage.css';
 //import { Html5QrcodeScanner } from 'html5-qrcode';
 
-function Searchpage({ isSearchPageVisible }) {
+function Searchpage({ isPageVisible }) {
 
     // const [scanResult, setScanResult] = useState(null)
 

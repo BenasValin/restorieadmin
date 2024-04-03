@@ -6,34 +6,22 @@ import ramIcon from './Images/ram.png'
 import warningIcon from './Images/warning.png'
 import SearchIcon from './Images/zoom.png'
 
-function NavigationBar({setIsBoxPageVisible, setIsRamPageVisible, setIsWarningPageVisible, setIsSearchPageVisible }){
+function NavigationBar({setIsPageVisible}){
    
     const unhideBoxPage = () => {
-        setIsBoxPageVisible(true);
-        setIsRamPageVisible(false);
-        setIsWarningPageVisible(false);
-        setIsSearchPageVisible(false);
+        setIsPageVisible("dezes")
       };
 
-    const unhideRamPage = () => {
-        setIsBoxPageVisible(false);
-        setIsRamPageVisible(true);
-        setIsWarningPageVisible(false);
-        setIsSearchPageVisible(false);
+    const unhidePrekesPage = () => {
+        setIsPageVisible("prekes")
     }
 
     const unhideWarningPage = () => {
-        setIsBoxPageVisible(false);
-        setIsRamPageVisible(false);
-        setIsWarningPageVisible(true);
-        setIsSearchPageVisible(false);
+        setIsPageVisible("ispejimas")
     }
 
     const unhideSearchPage = () => {
-        setIsBoxPageVisible(false);
-        setIsRamPageVisible(false);
-        setIsWarningPageVisible(false);
-        setIsSearchPageVisible(true);
+        setIsPageVisible("paieska")
     }
     
     
@@ -52,9 +40,9 @@ function NavigationBar({setIsBoxPageVisible, setIsRamPageVisible, setIsWarningPa
                 Dėžės
             </button>
 
-            <button className='navButton' onClick={unhideRamPage}>
+            <button className='navButton' onClick={unhidePrekesPage}>
                 <img src={ramIcon} className='navIcon'/>
-                Komponentai
+                Prekės
             </button>
 
             <button className='navButton' onClick={unhideWarningPage}>

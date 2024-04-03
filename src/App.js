@@ -1,7 +1,7 @@
 
 import NavigationBar from './NavigationBar/NavigationBar.jsx';
-import DezesModal from './DezesModal/DezesModel.jsx';
-import RamModal from './RamModal/RamModal.jsx';
+import DezesModal from './DezesModal/Dezes.jsx';
+import RamModal from './Prekes/Prekes.jsx';
 import Warning from './Warning/Warning.jsx';
 import Searchpage from './SeachPage/SearchPage.jsx';
 import './App.css';
@@ -15,22 +15,19 @@ function App() {
   const page = searchParams.get('page');
   const category = searchParams.get('category');
   const id = searchParams.get('id');
-  console.log(`page yra ${page}`)
-  console.log(`page yra ${page}`)
-  console.log(`page yra ${page}`)
 
-  const [isBoxPageVisible, setIsBoxPageVisible] = useState(page == "dezes" || page == null ? true : false);
-  const [isRamPageVisible, setIsRamPageVisible] = useState(page == "prekes" ? true : false);
-  const [isWarningPageVisible, setIsWarningPageVisible] = useState(page == "ispejimai" ? true : false);
-  const [isSearchPageVisible, setIsSearchPageVisible] = useState(page == "paieska" ? true : false);
-  
+  console.log(`page yra ${page}`)
+  console.log(`category yra ${category}`)
+  console.log(`id yra ${id}`)
+
+  const [isPageVisible, setIsPageVisible] = useState(page == null ? "dezes" : `${page}`);
 
 return(<div className="bodyContainer"> 
-    <NavigationBar setIsBoxPageVisible={setIsBoxPageVisible} setIsRamPageVisible={setIsRamPageVisible} setIsWarningPageVisible={setIsWarningPageVisible} setIsSearchPageVisible={setIsSearchPageVisible}/>
-      <DezesModal isBoxPageVisible={isBoxPageVisible} />
-      <RamModal isRamPageVisible={isRamPageVisible}/>
-      <Warning isWarningPageVisible={isWarningPageVisible}/>
-      <Searchpage isSearchPageVisible={isSearchPageVisible}/>
+    <NavigationBar setIsPageVisible={setIsPageVisible}/>
+      <DezesModal isPageVisible={isPageVisible} searchId={id} />
+      <RamModal isPageVisible={isPageVisible}/>
+      <Warning isPageVisible={isPageVisible}/>
+      <Searchpage isPageVisible={isPageVisible}/>
 </div>)
 };
 

@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import './Warning.css';
 
-function Warning(isWarningPageVisible){
+function Warning(isPageVisible){
 
   return (
-    <div className={isWarningPageVisible ? 'mainWarningContainer' : 'mainWarningContainer hidden'}>
+    <div className={isPageVisible == "ispejimai" ? 'mainWarningContainer' : 'mainWarningContainer hidden'}>
 
       
     </div>
