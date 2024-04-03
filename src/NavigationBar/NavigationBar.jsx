@@ -66,6 +66,7 @@ function NavigationBar({setIsBoxPageVisible, setIsRamPageVisible, setIsWarningPa
                 <img src={SearchIcon} className='navIcon'/>
                 Paieška
             </button>
+            
 
             </div>
         </nav>

@@ -4,7 +4,7 @@ import './RamModal.css'
 function RamModal({ isRamPageVisible }){
     
     return(
-        <>
+        <div style={{maxWidth: "100%"}}>
         <div className={isRamPageVisible ? 'mainRamContainer  ' : 'mainRamContainer hidden'}>
             <div className='header'>
 
@@ -33,7 +33,7 @@ function RamModal({ isRamPageVisible }){
 
             </div>
         </div>
-        </>
+        </div>
     )
 }
 

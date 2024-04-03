@@ -75,11 +75,8 @@ app.post('/api/getboxes', async (req, res) => {
     }
   });
 
-  app.get('/', (req, res) => {
-    console.log(req.query.category); // For `?category=deze`, this logs `deze`
-    res.send('Category is: ' + req.query.category);
+  app.get('/Products', (req, res) => {
+    res.sendFile(__dirname + '/public/products.jsx');
   });
-
-  
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));

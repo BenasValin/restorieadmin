@@ -5,9 +5,10 @@
 
 .mainRamContainer{ 
     background-color: #2d492d;
+    border: 2px solid #22282b;
     position: absolute;
     min-height: 100vh;
-    padding-left: 130px;
+    width: 100%;
 }
 
 .header{

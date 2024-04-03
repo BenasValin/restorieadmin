@@ -9,10 +9,21 @@ import React, {useState} from 'react';
 
 function App() {
 
-  const [isBoxPageVisible, setIsBoxPageVisible] = useState(true);
-  const [isRamPageVisible, setIsRamPageVisible] = useState(false);
-  const [isWarningPageVisible, setIsWarningPageVisible] = useState(false);
-  const [isSearchPageVisible, setIsSearchPageVisible] = useState(false);
+  const queryString = window.location.search;
+
+  const searchParams = new URLSearchParams(queryString);
+  const page = searchParams.get('page');
+  const category = searchParams.get('category');
+  const id = searchParams.get('id');
+  console.log(`page yra ${page}`)
+  console.log(`page yra ${page}`)
+  console.log(`page yra ${page}`)
+
+  const [isBoxPageVisible, setIsBoxPageVisible] = useState(page == "dezes" || page == null ? true : false);
+  const [isRamPageVisible, setIsRamPageVisible] = useState(page == "prekes" ? true : false);
+  const [isWarningPageVisible, setIsWarningPageVisible] = useState(page == "ispejimai" ? true : false);
+  const [isSearchPageVisible, setIsSearchPageVisible] = useState(page == "paieska" ? true : false);
+  
 
 return(<div className="bodyContainer"> 
     <NavigationBar setIsBoxPageVisible={setIsBoxPageVisible} setIsRamPageVisible={setIsRamPageVisible} setIsWarningPageVisible={setIsWarningPageVisible} setIsSearchPageVisible={setIsSearchPageVisible}/>
