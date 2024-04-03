@@ -3,14 +3,11 @@
     display: none;
 }
 
-.mainRamContainer{
+.mainRamContainer{ 
     background-color: #2d492d;
-    height: 100%;
-    width: 100%;
-    border: 2px solid #22282b;
     position: absolute;
+    min-height: 100vh;
     padding-left: 130px;
-    max-width: 1981px;
 }
 
 .header{
@@ -19,4 +16,23 @@
     padding: 15px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    height: 150px;
 }
+
+.mainRamContainer{
+
+    background-color: black;
+
+}
+
+.recordHeader{
+    display: flex;
+    flex-direction: row;
+}
+.choise{
+    height: 50px;
+    background-color: red;
+    width: 300px;
+    border: 1px solid green;
+}
+

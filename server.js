@@ -80,4 +80,6 @@ app.post('/api/getboxes', async (req, res) => {
     res.send('Category is: ' + req.query.category);
   });
 
+  
+
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));

@@ -143,6 +143,31 @@ const handleSubmit = async (element) => {
 }
 };
 
+
+const get = async () => {
+  try {
+  const response = await fetch('/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  await response.json().then(() => {
+    console.log(response)
+  });
+} catch (error) {
+  console.error('There was a problem with the fetch operation:', error);
+}
+};
+
+
+
+
+
 //-------------------------------------------------RENDERING-LIST-OF-BOXES------------------------------------------------------------------------------------------------------------------------
 
 
