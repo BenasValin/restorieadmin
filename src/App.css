@@ -1,6 +1,14 @@
 html *
 {
-   color: black;
+   font-family: 'Manrope';
+   color: white;
+}
+
+
+.bodyContainer{
+   display: grid;
+   grid-template-columns: 130px 1fr;
+   
 }
 
 

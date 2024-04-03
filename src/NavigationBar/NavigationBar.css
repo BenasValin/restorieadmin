@@ -1,11 +1,11 @@
 .navigationBarContainer {
   z-index: 9999;
   max-width: 130px;
-  padding: 20px 10px 0;
+  padding: 10px 0px 0;
   background-color: #F06B02;
-  position: absolute;
-  height: 100dvh;
   justify-content: center;
+  height: auto;
+  min-height: 98vh;
 }
 
 .appName {
@@ -29,25 +29,29 @@
   display: flex;
   flex-direction: column;
   color: white;
-  justify-content: space-between;
-  text-align: center;
 }
 
 .navButton{
   border: none;
-  background-color: rgb(224, 137, 70);
+  background-color: #F06B02;
   color: white;
-  transition: background-color 0.15s;
+  transition: background-color 0.1s;
   margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: left;
+  place-content: left;
+  text-align: left;
 }
 
 .navButton:hover{
-  background-color: #ce8248;
+  background-color: #cf5a00;
+  zoom: 1.1;
 }
 
 .navButton:active{
-  background-color: #b47341;
+  background-color: #aa4a00;
 }
 .navIcon{
-  width: 100%;
+  width: 30px;
 }
