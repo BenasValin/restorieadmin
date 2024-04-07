@@ -4,12 +4,15 @@ html *
    color: white;
 }
 
+input{
+   color:black !important
+}
+
 
 .bodyContainer{
    display: grid;
    grid-template-columns: 130px 1fr;
    
 }
-
 
 

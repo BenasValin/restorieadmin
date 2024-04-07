@@ -9,30 +9,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// app.post('/api', async (req, res) => {
-//     try {
-//         console.log('Called');
-//         const result = await dbOperation.getEmployees(req.body.name);
-//         res.send(result.recordset);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send("Internal Server Error");
-//     }
-// });
-
-// app.post('/hello', async(req, res) => {
-//     await dbOperation.createEmployee(req.body);
-//     const result = await dbOperation.getEmployees(req.body.ilgis);
-//     console.log('Called')
-//     res.send(result.recordset)
-// })
-
-app.post('/api/getboxes', async (req, res) => {
-    const box = {id: req.body.id, ilgis: req.body.ilgis, plotis: req.body.plotis, aukstis: req.body.aukstis, ipakavimas: req.body.ipakavimas}
-    console.log(box)
+app.post('/api/getdata', async (req, res) => {
+    const search = Object.entries(req.body);
+    console.log(`search yra ${search}`)
     try {
-      const boxes = await dbOperation.findBoxes(box.id, box.ilgis, box.plotis, box.aukstis, box.ipakavimas);
-      res.json(boxes);
+     let records = await dbOperation.getData(search);
+      res.json(records);
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");
@@ -40,11 +22,12 @@ app.post('/api/getboxes', async (req, res) => {
   });
 
 
-  app.post('/api/addbox', async (req, res) => {
-    const box = {ilgis: req.body.ilgis, plotis: req.body.plotis, aukstis: req.body.aukstis, kiekis: req.body.kiekis, ispejimas: req.body.ispejimas, kritinis: req.body.kritinis}
-    console.log(box)
+  app.post('/api/addRecord', async (req, res) => {
+    console.log(req.body)
+    const records = Object.entries(req.body);
+    console.log(records)
     try {
-      const boxes = await dbOperation.addBox(box.ilgis, box.plotis, box.aukstis, box.kiekis, box.ispejimas, box.kritinis);
+      const boxes = await dbOperation.addRecord(records);
       res.json(boxes);
     } catch (error) {
       console.error(error);
@@ -63,20 +46,17 @@ app.post('/api/getboxes', async (req, res) => {
     }
   });
 
-  app.post('/api/editbox', async (req, res) => {
-    const box = {id: req.body.id, ilgis: req.body.ilgis, plotis: req.body.plotis, aukstis: req.body.aukstis, kiekis: req.body.kiekis, ispejimas: req.body.ispejimas, kritinis: req.body.kritinis}
-    console.log(box)
+  app.post('/api/editRecord', async (req, res) => {
+    console.log(req.body)
+    const record = Object.entries(req.body);
+    console.log(record)
     try {
-      const boxes = await dbOperation.editBox(box.id, box.ilgis, box.plotis, box.aukstis, box.kiekis, box.ispejimas, box.kritinis);
+      const boxes = await dbOperation.editRecord(record);
       res.json(boxes);
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");
     }
-  });
-
-  app.get('/Products', (req, res) => {
-    res.sendFile(__dirname + '/public/products.jsx');
   });
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));

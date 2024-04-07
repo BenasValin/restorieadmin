@@ -4,7 +4,8 @@ import box from '../NavigationBar/Images/box.png'
 import trash from './Images/icons8-trash-96.png'
 import edit from './Images/icons8-edit-50.png'
 import qrcode from './Images/icons8-qr-code-100.png'
-import { deleteRecord } from '../recordActions/recordActions'
+import { addRecord, deleteRecord, getData, editRecord } from '../recordActions/recordActions'
+import { findAllInRenderedTree } from 'react-dom/test-utils';
 
 var QRCode = require('qrcode')
 
@@ -48,6 +49,7 @@ function DezesModal({ isPageVisible, searchId}) {
 
    const addNewBox = async () => {
     const box = {
+      kategorija: "deze",
       ilgis: newBoxDimensions.side1,
       plotis: newBoxDimensions.side2,
       aukstis: newBoxDimensions.side3,
@@ -59,62 +61,31 @@ function DezesModal({ isPageVisible, searchId}) {
       window.alert("Prašome užpildyti visus naujos dėžės laukelius :)");
       return;
     }
-    try {
-    const response = await fetch('/api/addbox', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(box)
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    else {
+      addRecord(box)
+      clearNewBox();
+      updateBoxes();
     }
-    await response.json().then(updateBoxes());
-  } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
-  }
+    
 };
 
-
- 
    const getOptimalBox = async () => {
     const box = {
+      kategorija: "deze",
       id: dimensions.id,
       ilgis: dimensions.side1,
       plotis: dimensions.side2,
       aukstis: dimensions.side3,
       ipakavimas: dimensions.pak
     }
-    if (box.id === '') box.id = -1;
-    if (box.ilgis === '') box.ilgis = 0;
-    if (box.plotis === '') box.plotis = 0;
-    if (box.aukstis === '') box.aukstis = 0;
-    if (box.ipakavimas === '') box.ipakavimas = 0;
-
-    try {
-    const response = await fetch('/api/getboxes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(box)
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
-  }
+      return getData(box);
+  
 };
 
 
 const handleSubmit = async (element) => {
   const updatedBox = {
+    kategorija: "deze",
     id: element.id,
     ilgis: parseInt(newIlgis.value) || element.ilgis,
     plotis: parseInt(newPlotis.value) || element.plotis,
@@ -123,25 +94,8 @@ const handleSubmit = async (element) => {
     ispejimas: parseInt(newIspejimas.value) || element.ispejimas,
     kritinis: parseInt(newKritinis.value) || element.kritinis,
   }
-  try {
-  const response = await fetch('/api/editbox', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify(updatedBox)
-  });
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  await response.json().then(() => {
-    setEditingBoxId(null);
-    updateBoxes();
-  });
-} catch (error) {
-  console.error('There was a problem with the fetch operation:', error);
-}
+  editRecord(updatedBox).then(() => {updateBoxes()
+  setEditingBoxId(null)})
 };
 
 
@@ -152,13 +106,7 @@ const handleSubmit = async (element) => {
 
 const updateBoxes = () => {
   getOptimalBox().then(data => {
-    if (Array.isArray(data)) {
       setBoxes(data);
-    } else if (data.recordset && Array.isArray(data.recordset)) {
-      setBoxes(data.recordset);
-    } else {
-      console.error('Data is not an array', data);
-    }
   }).catch(error => console.error('Failed to fetch boxes', error));
 };
 
@@ -172,8 +120,7 @@ const updateBoxes = () => {
         else setEditingBoxId(id);
     };
 
-    const stopEditingBox = (id) => {
-
+    const stopEditingBox = () => {
       setEditingBoxId(null);
   };
 
@@ -201,9 +148,9 @@ const updateBoxes = () => {
 
         <div className="actions">
           <button className='delete'
-           onClick={() => {
-            deleteRecord(element.id)
-            updateBoxes()}}>
+           onClick={() => deleteRecord(element.id).then(setTimeout(() => {
+            updateBoxes()
+           }, 100))}>
             <img className='trashIcon' src={trash} alt="" />
           </button>
           <button className='delete' onClick={() => startEditingBox(element.id)}>

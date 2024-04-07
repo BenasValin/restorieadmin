@@ -43,16 +43,13 @@
   align-items: left;
   place-content: left;
   text-align: left;
+  transition: zoom 0.5s;
 }
 
 .navButton:hover{
-  background-color: #cf5a00;
-  zoom: 1.1;
+  opacity: 80%;
 }
 
-.navButton:active{
-  background-color: #aa4a00;
-}
 .navIcon{
   width: 30px;
 }

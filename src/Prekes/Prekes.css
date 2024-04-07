@@ -8,7 +8,7 @@
     border: 2px solid #22282b;
     position: absolute;
     min-height: 100vh;
-    width: 100%;
+    min-width:calc(100% - 134px);
 }
 
 .headerPrekes{
@@ -20,8 +20,8 @@
 }
 
 .mainRamContainer{
-
-    background-color: #1d3f35;
+    padding-left: 130px;
+    background-color: #2c3331;
 
 }
 
@@ -49,4 +49,17 @@
 
 .aqw{
     height: 80px
+}
+.active{
+    zoom: 1.2;
+    background-color: #184d3d;
+    border-bottom: none;
+}
+.active:hover{
+    background-color: #184d3d !important;
+}
+.mobilusisTelefonasFilters{
+    width: 100%;
+    background-color: grey;
+    margin: 5px;
 }

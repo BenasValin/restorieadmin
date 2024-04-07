@@ -75,7 +75,7 @@
 }
 
 .boxContainer{
-    height: 100px;
+    height: auto;
     background-color: rgba(65, 95, 65, 0.466);
     margin: 10px;
     display: grid;

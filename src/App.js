@@ -6,6 +6,8 @@ import Warning from './Warning/Warning.jsx';
 import Searchpage from './SeachPage/SearchPage.jsx';
 import './App.css';
 import React, {useState} from 'react';
+import Inventorizacija from './Inventorizacija/Inventorizacija.jsx';
+import Komponentai from './Komponentai/Komponentai.jsx';
 
 function App() {
 
@@ -25,9 +27,11 @@ function App() {
 return(<div className="bodyContainer"> 
     <NavigationBar setIsPageVisible={setIsPageVisible}/>
       <DezesModal isPageVisible={isPageVisible} searchId={id} />
+      <Komponentai isPageVisible={isPageVisible}></Komponentai>
       <RamModal isPageVisible={isPageVisible}/>
       <Warning isPageVisible={isPageVisible}/>
       <Searchpage isPageVisible={isPageVisible}/>
+      <Inventorizacija isPageVisible={isPageVisible}/>
 </div>)
 };
 
