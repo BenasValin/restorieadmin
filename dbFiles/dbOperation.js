@@ -30,9 +30,11 @@ const addRecord = async (record) => {
         let names = ""
         let values = ""
         for (let i = 1; i<record.length; i++){
-            names += record[i][0];
-            values+= record[i][1]
-            if(i!=record.length-1) {
+            if (record[i][1] != ''){
+                names += record[i][0];
+                values+= checkIfString(record[i][1])
+            }
+            if(i!=record.length-1 && record[i+1][1] != '') {
                 names+=", "
                 values+=", "
             }
@@ -124,28 +126,6 @@ const categorySearch = async (id) => {
 
 
 
-const editBox = async (id, ilgis, plotis, aukstis, kiekis, ispejimas, kritinis) => {
-    id = parseInt(id);
-    ilgis = parseInt(ilgis);
-    plotis = parseInt(plotis);
-    aukstis = parseInt(aukstis);
-    kiekis = parseInt(kiekis);
-    ispejimas = parseInt(ispejimas);
-    kritinis = parseInt(kritinis);
-
-    try {
-        let pool = await sql.connect(config);
-        const query = `UPDATE deze
-        SET ilgis = '${ilgis}', plotis= '${plotis}', aukstis= '${aukstis}', kiekis= '${kiekis}', ispejimas= '${ispejimas}', kritinis= '${kritinis}'
-        WHERE id = ${id}`;
-        console.log(query); // Log the query
-        let boxes = await pool.request().query(query);
-        return boxes;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 const editRecord = async (record) => {
 
     try {
@@ -185,13 +165,25 @@ const getData = async (item) => {
     }
 };
 //Internal function for checking > or < 
-function checkPrefix(atribute){
-    if (atribute[0] == '<' || atribute[0] == '>') {
-        if(atribute.length==1) return '>-1'
-        else if (atribute.length == 2 && atribute[1] == "=") return '>=-1'
-        else return atribute
+function checkPrefix(attribute) {
+    if (attribute[0] == '<' || attribute[0] == '>' || attribute[0] == '=') {
+        if(attribute.length == 1) {
+            return '>-1';
+        }
+         else if (attribute.length == 2) {
+
+                if (attribute[1] == "=") return attribute; 
+                else if (!isNaN(atribute.substr(1))) return attribute; 
+                else return `LIKE '%${attribute.substr(1)}%'`; 
+            
+        }
     }
-    return '= ' + atribute
+    return `LIKE '%${attribute}%'`;
+}
+
+function checkIfString(atribute){
+    if (typeof(atribute)==='number') return atribute
+    else return `'${atribute}'`
 }
 
 
@@ -199,7 +191,6 @@ module.exports = {
     findBoxes,
     addRecord,
     deleteRecord,
-    editBox,
     getData,
     editRecord
 }
