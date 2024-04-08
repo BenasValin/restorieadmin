@@ -1,0 +1,23 @@
+.filterContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: end;
+    flex-wrap:nowrap; /* Allow wrapping */
+    background-color: #184d3d
+}
+
+.filter {
+    flex: 1;
+    flex-basis: 10%; /* Adjust based on your design needs */
+    margin: 5px;
+}
+.filterinput{
+    width: 100%; /* Take full width of the parent .filter div */
+    min-width: 0px; /* Override the default input size */
+    transition: width 0.5s;
+    border: none;
+}
+.filterinput:focus{
+    width: 14rem;
+}
