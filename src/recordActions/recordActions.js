@@ -80,10 +80,31 @@ const editRecord = async (item) => {
 }
 };
 
+const autoComplete = async (item) => {
+  try {
+  const response = await fetch('/api/autocomplete', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify(item)
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  const responseData = await response.json();
+  return responseData.recordset
+} catch (error) {
+  console.error('There was a problem with the fetch operation:', error);
+}
+};
+
 
 module.exports = {
     deleteRecord,
     addRecord,
     getData,
-    editRecord
+    editRecord,
+    autoComplete
   }

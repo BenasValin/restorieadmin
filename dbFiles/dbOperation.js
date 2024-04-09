@@ -148,14 +148,15 @@ const editRecord = async (record) => {
 
 const getData = async (item) => {
 
+
    try {
         let pool = await sql.connect(config);
-        let query = 
+        let query =
         `Select *
          from ${item[0][1]}
          where 1=1`
         for (let i = 1; i<item.length; i++){
-            if(item[i][1] != '') query += ` and ${item[i][0]} ${checkPrefix(item[i][1])}`
+            if(item[i][1] != '' && item[i][1] != undefined && item[i][1] != null) query += ` and ${checkPrefix(item[i][1], item[i][0])}`
         }
         console.log(query); // Log the query
         let records = await pool.request().query(query);
@@ -164,22 +165,47 @@ const getData = async (item) => {
         console.log(error);
     }
 };
-//Internal function for checking > or < 
-function checkPrefix(attribute) {
-    if (attribute[0] == '<' || attribute[0] == '>' || attribute[0] == '=') {
-        if(attribute.length == 1) {
-            return '>-1';
-        }
-         else if (attribute.length == 2) {
 
-                if (attribute[1] == "=") return attribute; 
-                else if (!isNaN(atribute.substr(1))) return attribute; 
-                else return `LIKE '%${attribute.substr(1)}%'`; 
-            
+
+const autoComplete = async (item) => {
+    console.log(`name = ${item.name}`)
+    console.log(`la= ${item.kategorija}`)
+    console.log(`name = ${item.name}`)
+    try { 
+         let pool = await sql.connect(config);
+         let query =
+         `Select DISTINCT ${item.name}
+          from ${item.kategorija}
+          where ${item.name} like '%${item.value}%'`
+         console.log(query); // Log the query
+         let records = await pool.request().query(query);
+         return records;
+     } catch (error) {
+         console.log(error);
+     }
+ };
+//Internal function for checking > or <
+function checkPrefix(atribute, columnName) {
+    atribute = atribute.replace(/[\/'"\[\]{}(),]/g, "");
+
+    if (atribute[0] == '<' || atribute[0] == '>' || atribute[0] == '=') {
+        if(atribute.length == 1) {
+            return `TRY_CONVERT(float, ${columnName}) > -1`;
+        }
+         else {
+                if ( atribute[1] == "="){
+                    if (atribute.length == 2 ) return `TRY_CONVERT(float, ${columnName}) > -1`;
+                    else if (!isNaN(parseFloat(atribute.substring(2)))) return `TRY_CONVERT(float, ${columnName}) ${atribute}`;
+                }
+                else if (!isNaN(parseFloat(atribute.substring(1)))) return `TRY_CONVERT(float, ${columnName}) ${atribute}`;
+                else return `${columnName} LIKE '%${atribute.substring(1)}%'`;
+           
         }
     }
-    return `LIKE '%${attribute}%'`;
+    if (!isNaN(parseFloat(atribute))) return `TRY_CONVERT(float, ${columnName})  = ${atribute}`
+    return `${columnName} LIKE '%${atribute}%'`;
 }
+
 
 function checkIfString(atribute){
     if (typeof(atribute)==='number') return atribute
@@ -192,5 +218,6 @@ module.exports = {
     addRecord,
     deleteRecord,
     getData,
-    editRecord
+    editRecord,
+    autoComplete
 }

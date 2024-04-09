@@ -1,19 +1,30 @@
 import './SSD.css'
 import React, { useState, useEffect, useRef } from 'react';
-import { deleteRecord, addRecord, getData } from '../recordActions/recordActions';
+import { deleteRecord, addRecord, getData, autoComplete } from '../recordActions/recordActions';
 
 function SSD(){
 
     const [SSDFilter, setSSDFilter] = useState({id: '', gamintojas: '', modelis: '', jungtiestipas: '', talpa: '', isvalytas: ''});
     
     const [SSDData, setSSDData] = useState([]);
-
+    const [autoCompleteData, setAutoCompleteData] = useState([])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setSSDFilter(prev => ({ ...prev, [name]: value }));
         console.log(SSDFilter)
+
+        const search = {
+          kategorija: "ssd",
+          name: e.target.name,
+          value: e.target.value
       };
+
+      autoComplete(search).then(data => {
+        setAutoCompleteData(data)
+        console.log(data)
+      })
+    }
 
       useEffect(() => {
         updateSSD();
@@ -26,6 +37,17 @@ function SSD(){
             setSSDData(data);
         }).catch(error => console.error('Failed to fetch SSD Data', error));
       };
+
+      function renderAutoCompleteData(item) {
+        const key = Object.keys(item)[0];
+        const value = item[key]; 
+      
+        return (
+          <ul>
+            <li>{`${value}`}</li>
+          </ul>
+        );
+      }
 
     const addSSD = () => {
       const SSD = {
@@ -62,6 +84,7 @@ function SSD(){
                 <a>{`Unikalus ID: ${element.id}`}</a><br></br>
                 <a>{`Gamintojas: ${element.gamintojas}`}</a><br></br>
                 <a>{`modelis: ${element.modelis}`}</a><br></br>
+                <a>{`jungties Tipas: ${element.jungtiestipas}`}</a><br></br>
                 <a>{`talpa: ${element.talpa}`}</a><br></br>
 
             </div>
@@ -79,15 +102,36 @@ function SSD(){
                 </button>
             <div className="filter">
                 <a>UnikalusID</a><br></br>
-                <input className="filterinput" type="text" name="id"  onChange={handleChange}/>
+                <div className='row'>
+                   <input className="filterinput" type="text" name="id"  onChange={handleChange} autoComplete='off'/>
+                </div>
+                <div className='resultBox'>
+                    {autoCompleteData.map(renderAutoCompleteData)}
+
+                </div>
+                
             </div>
             <div className="filter">
                 <a>Gamintojas</a><br></br>
-                <input className="filterinput" type="text" name="gamintojas"  onChange={handleChange}/>
+                <div className='row'>
+                   <input className="filterinput" type="text" name="gamintojas"  onChange={handleChange} autoComplete='off'/>
+                </div>
+                <div className='resultBox'>
+                    {autoCompleteData.map(renderAutoCompleteData)}
+
+                </div>
+                
             </div>
             <div className="filter">
                 <a>Modelis</a><br></br>
-                <input className="filterinput"type="text" name="modelis"  onChange={handleChange}/>
+                <div className='row'>
+                   <input className="filterinput" type="text" name="modelis"  onChange={handleChange} autoComplete='off'/>
+                </div>
+                <div className='resultBox'>
+                    {autoCompleteData.map(renderAutoCompleteData)}
+
+                </div>
+                
             </div>
             <div className="filter">
                 <a>Jungties Tipas</a><br></br>

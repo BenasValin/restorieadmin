@@ -59,4 +59,15 @@ app.post('/api/getdata', async (req, res) => {
     }
   });
 
+  app.post('/api/autocomplete', async (req, res) => {
+    try {
+     let records = await dbOperation.autoComplete(req.body);
+      res.json(records);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));

@@ -27,3 +27,15 @@
     background-color: green;
     margin: 3px;
 }
+
+.row{
+    display: row;
+    align-items: center;
+}
+input{
+    flex: 1;
+}
+.resultBox ul li{
+    list-style: none;
+    border-radius: 3px;
+}
